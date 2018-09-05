@@ -1,0 +1,11 @@
+<div>
+  <p>{{editId ? 'Edit' : 'Add new'}} company</p>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="name" />
+    <br><br>
+    <input type="text" formControlName="address" />
+    <br><br>
+    <input type="submit" value="submit" [disabled]="!form.valid">
+    <input type="button" value="cancel" [routerLink]="['/companies']" routerLinkActive="router-link-active" >
+  </form>
+</div>
