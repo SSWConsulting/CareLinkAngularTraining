@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { CompanyStateService } from 'src/app/companies/+state/companies.state.service';
 import { Company } from '../../../api.generated.service';
+import { AuthenticationService } from '../../../shared/AuthenticationService.service';
 @Component({
   selector: 'app-company-edit',
   templateUrl: './company-edit.component.html',
@@ -12,7 +13,8 @@ import { Company } from '../../../api.generated.service';
 export class CompanyEditComponent implements OnInit {
   form: FormGroup;
   editId: number;
-  constructor(private stateService: CompanyStateService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private stateService: CompanyStateService, private route: ActivatedRoute, private router: Router,
+  private authService: AuthenticationService) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -49,5 +51,9 @@ export class CompanyEditComponent implements OnInit {
         this.router.navigate(['/companies']);
       });
     }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

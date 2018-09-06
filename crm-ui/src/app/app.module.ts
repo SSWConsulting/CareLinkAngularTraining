@@ -1,5 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { HttpBackend, HttpClientModule, HttpXhrBackend, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { environment } from '../environments/environment';
@@ -7,6 +7,8 @@ import { API_BASE_URL } from './api.generated.service';
 import { AppComponent } from './app.component';
 import { route } from './app.route';
 import { GlobalErrorHandler } from './GlobalErrorHandler';
+import { HttpInterceptorService } from './HttpInterceptor.service';
+import { MockApiService } from './mock-api-service.ts.service';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -20,8 +22,25 @@ import { SharedModule } from './shared/shared.module';
     {
       provide: ErrorHandler,
       useClass: GlobalErrorHandler
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    },
+    {
+      provide: HttpBackend,
+      deps: [HttpXhrBackend, MockApiService],
+      useFactory: DecideWhichBackendToUse
     }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+export function DecideWhichBackendToUse(realbackend, mock) {
+  if (environment.use_mocked_api) {
+    return mock;
+  }
+  return realbackend;
+}

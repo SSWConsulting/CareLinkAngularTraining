@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { CrmGeneratedApiClient } from '../api.generated.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +10,29 @@ import { Observable } from 'rxjs';
 export class AuthenticationService {
   private readonly newProperty = 'sid';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private api: CrmGeneratedApiClient) {}
 
-  authenticateUser(user: string, password: string): Observable<string> {
-    // call the API to login and return the sessionID as observable
+  authenticateUser(user: string, password: string): Observable<boolean> {
+    return this.api
+      .tokens_Post({
+        userName: user,
+        pasword: password
+      })
+      .pipe(
+        tap(x => {
+          this.setSessionId(x);
+        }),
+        map(u => {
+          if (u) {
+            return true;
+          } else {
+            return false;
+          }
+        })
+      );
   }
 
-  setSessionId(token: string) {
+  private setSessionId(token: string) {
     sessionStorage.setItem(this.newProperty, token);
   }
   getSessionId(): string {

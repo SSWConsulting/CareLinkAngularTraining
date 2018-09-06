@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { AuthGuardService } from './shared/AuthGuard.service';
 import { PageNotFoundComponent } from './shared/container/page-not-found/page-not-found.component';
 export const route: Route[] = [
   {
@@ -12,7 +13,8 @@ export const route: Route[] = [
   },
   {
     path: 'companies',
-    loadChildren: './companies/companies.module#CompaniesModule'
+    loadChildren: './companies/companies.module#CompaniesModule',
+    canActivate: [AuthGuardService]
   },
   {
     path: '**',

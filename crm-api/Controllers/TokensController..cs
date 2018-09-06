@@ -17,7 +17,7 @@ namespace crm_api.Controllers
         {
             if (model.UserName == model.Pasword + "1")
                 return Ok("token_" + Guid.NewGuid());
-            return Unauthorized();
+            return Ok("");
         }
     }
 }

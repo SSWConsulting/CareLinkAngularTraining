@@ -6,7 +6,7 @@ import { LoginComponent } from './container/login/login.component';
 import { loginRoutes } from './login.route';
 
 @NgModule({
-  imports: [CommonModule, SharedModule, RouterModule, RouterModule.forChild(loginRoutes)],
+  imports: [CommonModule, SharedModule, RouterModule.forChild(loginRoutes)],
   declarations: [LoginComponent]
 })
 export class LoginModule {}

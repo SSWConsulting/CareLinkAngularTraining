@@ -8,7 +8,7 @@ import { CompanyEditComponent } from './container/company-edit/company-edit.comp
 import { CompanyListComponent } from './container/company-list/company-list.component';
 
 @NgModule({
-  imports: [CommonModule, SharedModule, RouterModule, RouterModule.forChild(companiesRoutes), ReactiveFormsModule],
+  imports: [CommonModule, SharedModule, RouterModule.forChild(companiesRoutes)],
   declarations: [CompanyListComponent, CompanyEditComponent]
 })
 export class CompaniesModule {}

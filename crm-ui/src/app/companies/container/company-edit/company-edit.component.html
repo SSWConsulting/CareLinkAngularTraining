@@ -1,5 +1,8 @@
 <div>
-  <p>{{editId ? 'Edit' : 'Add new'}} company</p>
+  <p>{{editId ? 'Edit' : 'Add new'}} company
+
+    <input type="button" value="logout" (click)="logout()">
+  </p>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <input type="text" formControlName="name" />
     <br><br>
