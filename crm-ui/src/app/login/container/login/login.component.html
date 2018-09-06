@@ -1,11 +1,11 @@
 <div>
-  <h1>Login to CRM</h1>
+  <h1 data-test-id="HEADER">Login to CRM</h1>
   <p style="color: red">{{errorMsg}}</p>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <input type="text" formControlName="username" />
     <br><br>
     <input type="password" formControlName="password" />
     <br><br>
-    <input type="submit" value="Login" [disabled]="!form.valid">
+    <input type="submit" value="Login" [disabled]="!form.valid" data-test-id="LOGIN-BUTTON">
   </form>
 </div>

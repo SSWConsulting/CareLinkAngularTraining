@@ -1,7 +1,6 @@
 import { HttpBackend, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { MockCompany, MockedCompanies } from './mock-api';
 
 @Injectable({
@@ -23,7 +22,7 @@ export class MockApiService implements HttpBackend {
         })
       );
       observer.complete();
-    }).pipe(delay(200));
+    });
   }
 
   handle(req: HttpRequest<any>): Observable<any> {

@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { route } from './app.route';
 import { GlobalErrorHandler } from './GlobalErrorHandler';
 import { HttpInterceptorService } from './HttpInterceptor.service';
-import { MockApiService } from './mock-api-service.ts.service';
+import { MockApiService } from './mock-api-service';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -38,7 +38,7 @@ import { SharedModule } from './shared/shared.module';
 })
 export class AppModule {}
 
-export function DecideWhichBackendToUse(realbackend, mock) {
+export function DecideWhichBackendToUse(realbackend: HttpBackend, mock: HttpBackend) {
   if (environment.use_mocked_api) {
     return mock;
   }
