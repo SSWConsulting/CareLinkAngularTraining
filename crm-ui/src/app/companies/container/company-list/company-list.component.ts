@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CompanyStateService } from '../../+state/companies.state.service';
+import { Store } from '@ngrx/store';
+import { LoadCompanies } from '../../+state/companies.actions';
+import { CompaniesState } from '../../+state/companies.reducer';
+import { companiesQuery } from '../../+state/companies.selectors';
 import { Company } from '../../../api.generated.service';
 import { AuthenticationService } from '../../../shared/AuthenticationService.service';
-import { CompaniesState } from '../../+state/companies.reducer';
-import { State, Store } from '@ngrx/store';
-import { companiesQuery } from '../../+state/companies.selectors';
-import { LoadCompanies } from '../../+state/companies.actions';
 
 @Component({
   selector: 'app-company-list',
@@ -17,8 +16,7 @@ export class CompanyListComponent implements OnInit {
   constructor(private authService: AuthenticationService, private companyStore: Store<CompaniesState>) {}
 
   ngOnInit() {
-    this.companyStore.select(companiesQuery.getCompanies)
-    .subscribe(x => {
+    this.companyStore.select(companiesQuery.getCompanies).subscribe(x => {
       this.companies = x;
     });
     this.companyStore.dispatch(new LoadCompanies());

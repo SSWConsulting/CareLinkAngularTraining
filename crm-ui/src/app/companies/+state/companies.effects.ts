@@ -1,11 +1,25 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, Effect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/nx';
 import { map } from 'rxjs/operators';
 import { CrmGeneratedApiClient } from '../../api.generated.service';
-import { CompaniesActionTypes, LoadCompanies, LoadCompaniesFailure, LoadCompaniesSuccess, LoadCompanyForEdit, LoadCompanyForEditSuccess, LoadCompanyForEditFailure, AddCompanyAction, AddCompanyActionSuccess, AddCompanyActionFailure, EditCompanyAction, EditCompanyActionSuccess, EditCompanyActionFailure } from './companies.actions';
+import {
+  AddCompanyAction,
+  AddCompanyActionFailure,
+  AddCompanyActionSuccess,
+  CompaniesActionTypes,
+  EditCompanyAction,
+  EditCompanyActionFailure,
+  EditCompanyActionSuccess,
+  LoadCompanies,
+  LoadCompaniesFailure,
+  LoadCompaniesSuccess,
+  LoadCompanyForEdit,
+  LoadCompanyForEditFailure,
+  LoadCompanyForEditSuccess
+} from './companies.actions';
 import { CompaniesState } from './companies.reducer';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class CompaniesEffects {
@@ -57,7 +71,6 @@ export class CompaniesEffects {
       return new AddCompanyActionFailure(error);
     }
   });
-
 
   @Effect()
   editCompany$ = this.dataPersistence.pessimisticUpdate(CompaniesActionTypes.EditCompany, {

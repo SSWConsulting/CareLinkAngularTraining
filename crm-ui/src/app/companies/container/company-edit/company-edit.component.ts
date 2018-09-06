@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
-import { CompanyStateService } from 'src/app/companies/+state/companies.state.service';
 import { AddCompanyAction, EditCompanyAction, LoadCompanyForEdit } from '../../+state/companies.actions';
 import { CompaniesState } from '../../+state/companies.reducer';
 import { companiesQuery } from '../../+state/companies.selectors';
@@ -18,7 +17,6 @@ export class CompanyEditComponent implements OnInit {
   form: FormGroup;
   editId: number;
   constructor(
-    private companyDataService: CompanyStateService,
     private companyStore: Store<CompaniesState>,
     private route: ActivatedRoute,
     private router: Router,
