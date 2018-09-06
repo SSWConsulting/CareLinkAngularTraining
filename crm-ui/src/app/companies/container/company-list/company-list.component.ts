@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyStateService } from '../../+state/companies.state.service';
 import { Company } from '../../../api.generated.service';
 import { AuthenticationService } from '../../../shared/AuthenticationService.service';
+import { CompaniesState } from '../../+state/companies.reducer';
+import { State, Store } from '@ngrx/store';
+import { companiesQuery } from '../../+state/companies.selectors';
+import { LoadCompanies } from '../../+state/companies.actions';
 
 @Component({
   selector: 'app-company-list',
@@ -10,13 +14,14 @@ import { AuthenticationService } from '../../../shared/AuthenticationService.ser
 })
 export class CompanyListComponent implements OnInit {
   companies: Company[];
-  constructor(private companyState: CompanyStateService, private authService: AuthenticationService) {}
+  constructor(private authService: AuthenticationService, private companyStore: Store<CompaniesState>) {}
 
   ngOnInit() {
-    this.companyState.companies$.subscribe(x => {
+    this.companyStore.select(companiesQuery.getCompanies)
+    .subscribe(x => {
       this.companies = x;
     });
-    this.companyState.getCompanies();
+    this.companyStore.dispatch(new LoadCompanies());
   }
 
   deleteCompany(comp: Company) {
