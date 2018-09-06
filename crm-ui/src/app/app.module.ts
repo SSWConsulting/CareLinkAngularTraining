@@ -1,12 +1,13 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
-import { route } from './app.route';
-import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
 import { API_BASE_URL } from './api.generated.service';
+import { AppComponent } from './app.component';
+import { route } from './app.route';
+import { GlobalErrorHandler } from './GlobalErrorHandler';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +16,10 @@ import { API_BASE_URL } from './api.generated.service';
     {
       provide: API_BASE_URL,
       useValue: environment.apiUrl
+    },
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler
     }
   ],
   bootstrap: [AppComponent]

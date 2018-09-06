@@ -170,6 +170,38 @@
           }
         }
       }
+    },
+    "/api/Tokens": {
+      "post": {
+        "tags": [
+          "Tokens"
+        ],
+        "operationId": "Tokens_Post",
+        "requestBody": {
+          "x-name": "model",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -189,6 +221,18 @@
             "type": "string"
           },
           "address": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userName": {
+            "type": "string"
+          },
+          "pasword": {
             "type": "string"
           }
         }

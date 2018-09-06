@@ -17,4 +17,8 @@ export class CompanyListComponent implements OnInit {
     });
     this.companyState.getCompanies();
   }
+
+  deleteCompany(comp: Company) {
+    throw Error('Sorry, Delete company is not implemented yet');
+  }
 }
